@@ -1,17 +1,19 @@
 {
-  "name": "babel-transforms",
+  "name": "@ember-decorators/babel-transforms",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Configures the consuming ember-cli app's or addon's Babel transpiler for decorators.",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "decorators",
+    "babel"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Jan Buschtöns <jan@buschtoens.me>",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "ember-decorators/babel-transforms",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
