@@ -1,5 +1,11 @@
 # @ember-decorators/babel-transforms
 
+[![Build Status](https://travis-ci.org/ember-decorators/babel-transforms.svg)](https://travis-ci.org/ember-decorators/babel-transforms)
+[![npm version](https://badge.fury.io/js/%40ember-decorators%2Fbabel-transforms.svg)](https://badge.fury.io/js/%40ember-decorators%2Fbabel-transforms)
+[![Greenkeeper badge](https://badges.greenkeeper.io/ember-decorators/babel-transforms.svg)](https://greenkeeper.io/)
+[![dependencies Status](https://david-dm.org/ember-decorators/babel-transforms/status.svg)](https://david-dm.org/ember-decorators/babel-transforms)
+[![devDependencies Status](https://david-dm.org/ember-decorators/babel-transforms/dev-status.svg)](https://david-dm.org/ember-decorators/babel-transforms?type=dev)
+
 Configures the consuming ember-cli app's or addon's Babel transpiler for decorators.
 
 ## Installation
