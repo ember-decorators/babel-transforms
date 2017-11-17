@@ -69,3 +69,9 @@ module.exports = {
   }
 };
 ```
+
+Also, don't forget to add `@ember-decorators/babel-transforms` to your own addon in the first place. :wink:
+
+```
+ember install -S @ember-decorators/babel-transforms
+```
