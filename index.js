@@ -34,25 +34,10 @@ function hasPlugin(plugins, name) {
 module.exports = {
   name: 'babel-transforms',
 
-  _getParentOptions() {
-    let options;
-
-    // The parent can either be an Addon or a Project. If it's an addon,
-    // we want to use the app instead. This public method probably wasn't meant
-    // for this, but it's named well enough that we can use it for this purpose.
-    if (this.parent && !this.parent.isEmberCLIProject) {
-      options = this.parent.options = this.parent.options || {};
-    } else {
-      options = this.app.options = this.app.options || {};
-    }
-
-    return options;
-  },
-
-  included(app) {
+  included(parent) {
     this._super.included.apply(this, arguments);
 
-    const parentOptions = this._getParentOptions();
+    const parentOptions = (parent.options = parent.options || {});
 
     const disableTransforms =
       parentOptions.emberDecorators &&
