@@ -44,7 +44,7 @@ module.exports = {
     const ownOptions = (parentOptions['@ember-decorators/babel-transforms'] =
       parentOptions['@ember-decorators/babel-transforms'] || {});
 
-    if (!this._registeredWithBabel && !ownOptions.disableTransforms) {
+    if (!this._registeredWithBabel && !ownOptions.disable) {
       const checker = new VersionChecker(this.parent).for(
         'ember-cli-babel',
         'npm'
