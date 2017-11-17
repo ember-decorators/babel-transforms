@@ -37,13 +37,14 @@ module.exports = {
   included(parent) {
     this._super.included.apply(this, arguments);
 
+    // Create parent options, if they do nox exist
     const parentOptions = (parent.options = parent.options || {});
 
-    const disableTransforms =
-      parentOptions.emberDecorators &&
-      parentOptions.emberDecorators.disableTransforms;
+    // Create our own options, if they do not exist
+    const ownOptions = (parentOptions['@ember-decorators/babel-transforms'] =
+      parentOptions['@ember-decorators/babel-transforms'] || {});
 
-    if (!this._registeredWithBabel && !disableTransforms) {
+    if (!this._registeredWithBabel && !ownOptions.disableTransforms) {
       const checker = new VersionChecker(this.parent).for(
         'ember-cli-babel',
         'npm'
