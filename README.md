@@ -75,3 +75,26 @@ Also, don't forget to add `@ember-decorators/babel-transforms` to your own addon
 ```
 ember install -S @ember-decorators/babel-transforms
 ```
+
+## Configuration
+
+You can configure this addon in you `ember-cli-build.js` file:
+
+```js
+/* eslint-env node */
+'use strict';
+
+const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+
+module.exports = function(defaults) {
+  const app = new EmberAddon(defaults, {
+    '@ember-decorators/babel-transforms': {
+      disable: false
+    }
+  });
+
+  return app.toTree();
+};
+```
+
+The only option is `disable`, which defaults to `false`. If you set `disable` to `true`, Babel will not get configured for decorators.
