@@ -73,7 +73,7 @@ module.exports = {
           plugins.push(TransformClassProperties);
         }
       } else {
-        app.project.ui.writeWarnLine(
+        parent.project.ui.writeWarnLine(
           '@ember-decorators/babel-transforms: You are using an unsupported ember-cli-babel version, decorator/class-property transforms will not be included automatically'
         );
       }
