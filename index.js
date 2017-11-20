@@ -32,7 +32,7 @@ function hasPlugin(plugins, name) {
 }
 
 module.exports = {
-  name: 'babel-transforms',
+  name: '@babel-decorators/babel-transforms',
 
   included(parent) {
     this._super.included.apply(this, arguments);
