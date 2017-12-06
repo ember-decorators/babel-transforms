@@ -35,7 +35,9 @@ module.exports = {
   name: '@babel-decorators/babel-transforms',
 
   included(parent) {
-    this._super.included.apply(this, arguments);
+    this._super &&
+      this._super.included &&
+      this._super.included.apply(this, arguments);
 
     // Create parent options, if they do nox exist
     const parentOptions = (parent.options = parent.options || {});
