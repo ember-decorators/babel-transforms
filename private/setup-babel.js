@@ -1,6 +1,18 @@
 /* eslint-env node */
 'use strict';
 
+/**
+ * Please *do not* import this file in your project. We put this here for
+ * backwards compatibility reasons with the ember-decorators main package.
+ *
+ * This is explicitly private API and not intended for use inside third-party
+ * addons.
+ *
+ * If you find yourself in need of importing this file, because babel-transforms
+ * does not serve your special use case, please open an issue instead and let us
+ * find a solution. :)
+ */
+
 const path = require('path');
 const VersionChecker = require('ember-cli-version-checker');
 

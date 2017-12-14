@@ -1,7 +1,7 @@
 /* eslint-env node */
 'use strict';
 
-const setupBabel = require('./setup-babel');
+const setupBabel = require('./private/setup-babel');
 
 module.exports = {
   name: '@babel-decorators/babel-transforms',
