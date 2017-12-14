@@ -9,7 +9,7 @@ module.exports = {
   included(parent) {
     this._super.included.apply(this, arguments);
 
-    // Create parent options, if they do nox exist
+    // Create parent options, if they do not exist
     const parentOptions = (parent.options = parent.options || {});
 
     // Create our own options, if they do not exist

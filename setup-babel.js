@@ -32,7 +32,7 @@ function hasPlugin(plugins, name) {
 }
 
 module.exports = function setupBabel(parent) {
-  // Create parent options, if they do nox exist
+  // Create parent options, if they do not exist
   const parentOptions = (parent.options = parent.options || {});
 
   const checker = new VersionChecker(parent).for('ember-cli-babel', 'npm');
