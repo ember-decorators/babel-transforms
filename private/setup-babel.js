@@ -13,7 +13,6 @@
  * find a solution. :)
  */
 
-const path = require('path');
 const VersionChecker = require('ember-cli-version-checker');
 
 function requireTransform(transformName) {

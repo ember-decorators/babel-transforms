@@ -16,8 +16,10 @@
   "repository": "ember-decorators/babel-transforms",
   "scripts": {
     "build": "ember build",
-    "start": "ember server",
-    "test": "ember try:each"
+    "lint:js": "eslint .",
+    "start": "ember serve",
+    "test": "ember test",
+    "test:all": "ember try:each"
   },
   "dependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -27,11 +29,9 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.0.2",
-    "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
-    "ember-cli": "~2.16.2",
-    "ember-cli-dependency-checker": "^2.0.0",
-    "ember-cli-eslint": "^4.0.0",
+    "ember-cli": "~3.3.0",
+    "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
@@ -42,16 +42,20 @@
     "ember-disable-prototype-extensions": "^1.1.2",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
-    "ember-resolver": "^4.0.0",
-    "ember-source": "~2.16.0",
+    "ember-resolver": "^5.0.0",
+    "ember-source": "~3.3.1",
+    "ember-source-channel-url": "^1.1.0",
+    "ember-try": "^0.2.23",
+    "eslint": "^5.2.0",
     "eslint-config-prettier": "^2.7.0",
-    "eslint-plugin-ember": "^4.6.2",
+    "eslint-plugin-ember": "^5.2.0",
+    "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-prettier": "^2.3.1",
     "loader.js": "^4.2.3",
     "prettier": "^1.8.2"
   },
   "engines": {
-    "node": "^4.5 || 6.* || >= 7.*"
+    "node": "6.* || 8.* || >= 10.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
