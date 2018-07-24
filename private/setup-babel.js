@@ -13,21 +13,10 @@
  * find a solution. :)
  */
 
-const path = require('path');
 const VersionChecker = require('ember-cli-version-checker');
 
 function requireTransform(transformName) {
-  let plugin = require(transformName);
-
-  plugin = plugin.__esModule ? plugin.default : plugin;
-
-  // adding `baseDir` ensures that broccoli-babel-transpiler does not
-  // issue a warning and opt out of caching
-  const pluginPath = require.resolve(`${transformName}/package`);
-  const pluginBaseDir = path.dirname(pluginPath);
-  plugin.baseDir = () => pluginBaseDir;
-
-  return plugin;
+  return require.resolve(transformName);
 }
 
 function hasPlugin(plugins, name) {
@@ -50,13 +39,6 @@ module.exports = function setupBabel(parent) {
   const checker = new VersionChecker(parent).for('ember-cli-babel', 'npm');
 
   if (checker.satisfies('^6.0.0-beta.1')) {
-    const TransformDecoratorsLegacy = requireTransform(
-      'babel-plugin-transform-decorators-legacy'
-    );
-    const TransformClassProperties = requireTransform(
-      'babel-plugin-transform-class-properties'
-    );
-
     // Create babel options if they do not exist
     parentOptions.babel = parentOptions.babel || {};
 
@@ -66,11 +48,11 @@ module.exports = function setupBabel(parent) {
 
     if (!hasPlugin(plugins, 'transform-decorators-legacy')) {
       // unshift the transform because it always must come before class properties
-      plugins.unshift(TransformDecoratorsLegacy);
+      plugins.unshift(requireTransform('babel-plugin-transform-decorators-legacy'));
     }
 
     if (!hasPlugin('transform-class-properties')) {
-      plugins.push(TransformClassProperties);
+      plugins.push(requireTransform('babel-plugin-transform-class-properties'));
     }
   } else {
     parent.project.ui.writeWarnLine(
