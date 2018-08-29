@@ -38,14 +38,14 @@ module.exports = function setupBabel(parent) {
 
   const checker = new VersionChecker(parent).for('ember-cli-babel', 'npm');
 
+  // Create babel options if they do not exist
+  parentOptions.babel = parentOptions.babel || {};
+
+  // Create and pull off babel plugins
+  const plugins = (parentOptions.babel.plugins =
+    parentOptions.babel.plugins || []);
+
   if (checker.satisfies('^6.0.0-beta.1')) {
-    // Create babel options if they do not exist
-    parentOptions.babel = parentOptions.babel || {};
-
-    // Create and pull off babel plugins
-    const plugins = (parentOptions.babel.plugins =
-      parentOptions.babel.plugins || []);
-
     if (!hasPlugin(plugins, 'transform-decorators-legacy')) {
       // unshift the transform because it always must come before class properties
       plugins.unshift(requireTransform('babel-plugin-transform-decorators-legacy'));
@@ -53,6 +53,18 @@ module.exports = function setupBabel(parent) {
 
     if (!hasPlugin('transform-class-properties')) {
       plugins.push(requireTransform('babel-plugin-transform-class-properties'));
+    }
+  } else if (checker.satisfies('^7.0.0')) {
+    if (!hasPlugin(plugins, '@babel/plugin-proposal-decorators')) {
+      // unshift the transform because it always must come before class properties
+      plugins.unshift([
+        requireTransform('@babel/plugin-proposal-decorators'),
+        { legacy: true }
+      ]);
+    }
+
+    if (!hasPlugin('@babel/plugin-proposal-class-properties')) {
+      plugins.push(requireTransform('@babel/plugin-proposal-class-properties'));
     }
   } else {
     parent.project.ui.writeWarnLine(
