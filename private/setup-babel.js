@@ -54,7 +54,7 @@ module.exports = function setupBabel(parent) {
     if (!hasPlugin('transform-class-properties')) {
       plugins.push(requireTransform('babel-plugin-transform-class-properties'));
     }
-  } else if (checker.satisfies('^7.0.0')) {
+  } else if (checker.gte('7.0.0')) {
     if (!hasPlugin(plugins, '@babel/plugin-proposal-decorators')) {
       // unshift the transform because it always must come before class properties
       plugins.unshift([
