@@ -7,7 +7,7 @@ module.exports = function() {
       {
         name: 'ember-cli-babel-6',
         npm: {
-          dependencies: {
+          devDependencies: {
             'ember-cli-babel': '^6.6.0'
           }
         }
