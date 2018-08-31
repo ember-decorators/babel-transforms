@@ -64,7 +64,10 @@ module.exports = function setupBabel(parent) {
     }
 
     if (!hasPlugin('@babel/plugin-proposal-class-properties')) {
-      plugins.push(requireTransform('@babel/plugin-proposal-class-properties'));
+      plugins.push([
+        requireTransform('@babel/plugin-proposal-class-properties'),
+        { loose: true }
+      ]);
     }
   } else {
     parent.project.ui.writeWarnLine(
