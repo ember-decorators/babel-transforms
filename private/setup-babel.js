@@ -14,60 +14,37 @@
  */
 
 const VersionChecker = require('ember-cli-version-checker');
+const { hasPlugin, addPlugin } = require('ember-cli-babel-plugin-helpers');
 
 function requireTransform(transformName) {
   return require.resolve(transformName);
 }
 
-function hasPlugin(plugins, name) {
-  for (const maybePlugin of plugins) {
-    const plugin = Array.isArray(maybePlugin) ? maybePlugin[0] : maybePlugin;
-    const pluginName = typeof plugin === 'string' ? plugin : plugin.name;
-
-    if (pluginName === name) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
 module.exports = function setupBabel(parent) {
-  // Create parent options, if they do not exist
-  const parentOptions = (parent.options = parent.options || {});
-
   const checker = new VersionChecker(parent).for('ember-cli-babel', 'npm');
 
-  // Create babel options if they do not exist
-  parentOptions.babel = parentOptions.babel || {};
-
-  // Create and pull off babel plugins
-  const plugins = (parentOptions.babel.plugins =
-    parentOptions.babel.plugins || []);
+  // The decorators transform must come before the class-properties transform, so we constrain the decorators
+  // plugin when we add it to come before class-properties if it's already there.
 
   if (checker.satisfies('^6.0.0-beta.1')) {
-    if (!hasPlugin(plugins, 'transform-decorators-legacy')) {
-      // unshift the transform because it always must come before class properties
-      plugins.unshift(requireTransform('babel-plugin-transform-decorators-legacy'));
+    if (!hasPlugin(parent, 'transform-decorators-legacy')) {
+      addPlugin(parent, requireTransform('babel-plugin-transform-decorators-legacy', {
+        before: ['transform-class-properties']
+      }));
     }
 
-    if (!hasPlugin('transform-class-properties')) {
-      plugins.push(requireTransform('babel-plugin-transform-class-properties'));
+    if (!hasPlugin(parent, 'transform-class-properties')) {
+      addPlugin(parent, requireTransform('babel-plugin-transform-class-properties'));
     }
   } else if (checker.gte('7.0.0')) {
-    if (!hasPlugin(plugins, '@babel/plugin-proposal-decorators')) {
-      // unshift the transform because it always must come before class properties
-      plugins.unshift([
-        requireTransform('@babel/plugin-proposal-decorators'),
-        { legacy: true }
-      ]);
+    if (!hasPlugin(parent, '@babel/plugin-proposal-decorators')) {
+      addPlugin(parent, [requireTransform('@babel/plugin-proposal-decorators'), { legacy: true }], {
+        before: ['@babel/plugin-proposal-class-properties']
+      });
     }
 
-    if (!hasPlugin('@babel/plugin-proposal-class-properties')) {
-      plugins.push([
-        requireTransform('@babel/plugin-proposal-class-properties'),
-        { loose: true }
-      ]);
+    if (!hasPlugin(parent, '@babel/plugin-proposal-class-properties')) {
+      addPlugin(parent, [requireTransform('@babel/plugin-proposal-class-properties'), { loose: true }]);
     }
   } else {
     parent.project.ui.writeWarnLine(
